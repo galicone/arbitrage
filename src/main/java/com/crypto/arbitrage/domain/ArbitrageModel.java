@@ -1,6 +1,6 @@
 package com.crypto.arbitrage.domain;
 
-public class ArbitrageModel {
+public class ArbitrageModel implements Comparable<ArbitrageModel> {
 
 	private Double buyAtPrice;
 	
@@ -60,5 +60,16 @@ public class ArbitrageModel {
 
 	public void setDifferencePercentage(Double differencePercentage) {
 		this.differencePercentage = differencePercentage;
+	}
+
+	@Override
+	public int compareTo(ArbitrageModel o) {
+		if (o.differencePercentage > differencePercentage) {
+			return 1;
+		} else if (differencePercentage == o.differencePercentage) {
+			return 0;
+		} else {
+			return -1;
+		}
 	}
 }
