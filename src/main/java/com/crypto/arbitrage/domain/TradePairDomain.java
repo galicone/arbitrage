@@ -7,6 +7,8 @@ public class TradePairDomain {
 	private Double bidPrice;
 	
 	private String type;
+	
+	private String exchangeName;
 
 	public Double getAskPrice() {
 		return askPrice;
@@ -30,5 +32,13 @@ public class TradePairDomain {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getExchangeName() {
+		return exchangeName;
+	}
+
+	public void setExchangeName(String exchangeName) {
+		this.exchangeName = exchangeName;
 	}
 }

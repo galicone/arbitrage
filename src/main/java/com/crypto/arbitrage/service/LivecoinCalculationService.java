@@ -11,13 +11,13 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.stereotype.Service;
 
-import com.crypto.arbitrage.converter.CryptopiaConverter;
+import com.crypto.arbitrage.converter.LivecoinConverter;
 import com.crypto.arbitrage.domain.Constants;
 import com.crypto.arbitrage.domain.TradePairDomain;
-import com.crypto.arbitrage.domain.cryptopia.MarketsCryptopiaModel;
+import com.crypto.arbitrage.domain.livecoin.MarketsLivecoinModel;
 
 @Service
-public class CryptopiaCalculationService extends AbstractCalculationService {
+public class LivecoinCalculationService extends AbstractCalculationService {
 	
 	@Override
 	public Map<String, TradePairDomain> getData() {
@@ -25,15 +25,15 @@ public class CryptopiaCalculationService extends AbstractCalculationService {
 		
 		WebTarget target = client.target(getBaseURI());
 		
-		MarketsCryptopiaModel response = target.path(Constants.GET_MARKETS_CRYPTOPIA).
+		MarketsLivecoinModel response = target.path(Constants.GET_MARKETS_LIVECOIN).
                 request().
                 accept(MediaType.TEXT_PLAIN).
-                get(MarketsCryptopiaModel.class);	
+                get(MarketsLivecoinModel.class);	
 		
-		return CryptopiaConverter.convertResult(response);
+		return LivecoinConverter.convertResult(response);
 	}
 	
 	private static URI getBaseURI() {
-        return UriBuilder.fromUri(Constants.BASE_URL_CRYPTOPIA).build();
+        return UriBuilder.fromUri(Constants.BASE_URL_LIVECOIN).build();
     }
 }

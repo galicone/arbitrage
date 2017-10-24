@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.crypto.arbitrage.domain.Constants;
 import com.crypto.arbitrage.domain.TradePairDomain;
 import com.crypto.arbitrage.domain.cryptopia.MarketsCryptopiaModel;
 import com.crypto.arbitrage.domain.cryptopia.TradePairCryptopiaModel;
@@ -24,8 +25,12 @@ public class CryptopiaConverter {
 			tradePairDomain.setAskPrice(tradePair.getAskPrice());
 			tradePairDomain.setBidPrice(tradePair.getBidPrice());
 			tradePairDomain.setType(type);
+			tradePairDomain.setExchangeName(Constants.EXCHANGE_NAME_CRYPTOPIA);
 			
-			result.put(type, tradePairDomain);
+			if (tradePairDomain.getAskPrice() != null && tradePairDomain.getBidPrice() != null 
+					&& tradePairDomain.getAskPrice() != 0 && tradePairDomain.getBidPrice() != 0) {
+				result.put(type, tradePairDomain);
+			}
 		}
 		
 		return result;

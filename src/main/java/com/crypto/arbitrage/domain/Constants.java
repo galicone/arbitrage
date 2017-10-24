@@ -2,10 +2,15 @@ package com.crypto.arbitrage.domain;
 
 public final class Constants {
 
-	public static String CRYPTOPIA_BASE_URL = "https://www.cryptopia.co.nz/api/";
-	public static String BITTREX_BASE_URL = "https://bittrex.com/api/v1.1/public/";
+	public static String BASE_URL_CRYPTOPIA = "https://www.cryptopia.co.nz/api/";
+	public static String BASE_URL_BITTREX = "https://bittrex.com/api/v1.1/public/";
+	public static String BASE_URL_LIVECOIN = "https://api.livecoin.net/";
 	
-	public static String CRYPTOPIA_GET_MARKETS = "GetMarkets";
-	public static String BITTREX_GET_MARKETS = "getmarketsummaries";
+	public static String GET_MARKETS_CRYPTOPIA = "GetMarkets";
+	public static String GET_MARKETS_BITTREX = "getmarketsummaries";
+	public static String GET_MARKETS_LIVECOIN = "exchange/maxbid_minask";
 	
+	public static String EXCHANGE_NAME_CRYPTOPIA = "Cryptopia";
+	public static String EXCHANGE_NAME_BITTREX = "Bittrex";
+	public static String EXCHANGE_NAME_LIVECOIN = "Livecoin";
 }
