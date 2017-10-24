@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.crypto.arbitrage.domain.ArbitrageModel;
 import com.crypto.arbitrage.service.ArbitrageService;
+import com.crypto.arbitrage.service.BittrexArbitrageService;
+import com.crypto.arbitrage.service.CryptopiaArbitrageService;
+import com.crypto.arbitrage.service.LivecoinArbitrageService;
 
 @RestController
 public class ArbitrageController {
@@ -16,8 +19,33 @@ public class ArbitrageController {
 	@Autowired
 	private ArbitrageService arbitrageService;
 	
+	@Autowired
+	private LivecoinArbitrageService livecoinArbitrageService;
+	
+	@Autowired
+	private CryptopiaArbitrageService cryptopiaArbitrageService;
+	
+	@Autowired
+	private BittrexArbitrageService bittrexArbitrageService;
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage")
 	public List<ArbitrageModel> calculateArbitrage() {
 		return arbitrageService.calculateArbitrage();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage/livecoin")
+	public List<ArbitrageModel> calculateLivecoinArbitrage() {
+		return livecoinArbitrageService.calculateArbitrage();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage/cryptopia")
+	public List<ArbitrageModel> calculateCryptopiaArbitrage() {
+		return cryptopiaArbitrageService.calculateArbitrage();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage/bittrex")
+	public List<ArbitrageModel> calculateBittrexArbitrage() {
+		return bittrexArbitrageService.calculateArbitrage();
+	}
+	
 }
