@@ -27,7 +27,7 @@ public class LivecoinCalculationService extends AbstractCalculationService {
 		
 		MarketsLivecoinModel response = target.path(Constants.GET_MARKETS_LIVECOIN).
                 request().
-                accept(MediaType.TEXT_PLAIN).
+                accept(MediaType.APPLICATION_JSON).
                 get(MarketsLivecoinModel.class);	
 		
 		return LivecoinConverter.convertResult(response);
