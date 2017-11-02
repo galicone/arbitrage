@@ -30,7 +30,7 @@ public class ArbitrageController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage")
 	public List<ArbitrageModel> calculateArbitrage() {
-		return arbitrageService.calculateArbitrage();
+		return arbitrageService.returnCalculationResult();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage/livecoin")

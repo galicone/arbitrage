@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.crypto.arbitrage.domain.ArbitrageModel;
@@ -24,23 +25,33 @@ public class ArbitrageService {
 	@Autowired
 	private LivecoinCalculationService livecoinCalculationService;
 	
-	public List<ArbitrageModel> calculateArbitrage() {
+	private List<ArbitrageModel> arbitrages =  new ArrayList<ArbitrageModel>();
+	
+	@Scheduled(initialDelay = 5000, fixedRate = 60000)
+	private List<ArbitrageModel> calculateArbitrage() {
 		Map<String, TradePairDomain> bittrexTradePairs = bittrexCalculationService.getData();
 		Map<String, TradePairDomain> cryptopiaTradePairs = cryptopiaCalculationService.getData();
 		Map<String, TradePairDomain> livecoinTradePairs = livecoinCalculationService.getData();
 		
-		List<ArbitrageModel> arbitrages = new ArrayList<ArbitrageModel>();
+		List<ArbitrageModel> arbitragesTmp = new ArrayList<ArbitrageModel>();
 		
 		List<ArbitrageModel> bittrexCryptopiaArbitrages = calculateArbitrage(bittrexTradePairs, cryptopiaTradePairs);
 		List<ArbitrageModel> bittrexLivecoinArbitrages = calculateArbitrage(bittrexTradePairs, livecoinTradePairs);
 		List<ArbitrageModel> LivecoinCryptopiaArbitrages = calculateArbitrage(livecoinTradePairs, cryptopiaTradePairs);
 		
 		
-		arbitrages.addAll(bittrexCryptopiaArbitrages);
-		arbitrages.addAll(bittrexLivecoinArbitrages);
-		arbitrages.addAll(LivecoinCryptopiaArbitrages);
-		Collections.sort(arbitrages);
+		arbitragesTmp.addAll(bittrexCryptopiaArbitrages);
+		arbitragesTmp.addAll(bittrexLivecoinArbitrages);
+		arbitragesTmp.addAll(LivecoinCryptopiaArbitrages);
+		Collections.sort(arbitragesTmp);
 		
+		arbitrages.clear();
+		arbitrages.addAll(arbitragesTmp);
+		
+		return arbitrages;
+	}
+	
+	public List<ArbitrageModel> returnCalculationResult() {
 		return arbitrages;
 	}
 	
