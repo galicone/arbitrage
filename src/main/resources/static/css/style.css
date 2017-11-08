@@ -8500,3 +8500,23 @@ tr.group:hover {
 #polar-chart-holder {
   padding-top: 20px;
 }
+
+/* My custom css */
+
+.navbar-custom {
+	background-color: #18699e;
+	height: 50px;
+	line-height: 50px;
+}
+
+#btn_login {
+	background-color: #18699e;
+}
+
+#login-part {
+	background-image:url(/images/textured-background.jpg);
+	height: 500px;
+	border-bottom: 1px solid blue;
+	
+}
+

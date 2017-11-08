@@ -7,20 +7,23 @@
 </head>
 
 <body>
-	<nav>
+	<nav class="navbar-custom">
 		<div class="nav-wrapper">
 			<a href="#" class="brand-logo">Crypto Arbitrage</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="badges.html">Contact</a></li>
 				<li>
 					<form id="signout" th:action="@{/logout}" method="post">
-						<a href="#" onclick="document.getElementById('signout').submit();">Log Out</a>
+						<a href="#" onclick="document.getElementById('signout').submit();">Log
+							Out</a>
 					</form>
 				</li>
 			</ul>
 		</div>
 	</nav>
 
+	<div class="section"></div>
+	<div class="section"></div>
 	<div id="jsGrid" style="margin: 0 auto;"></div>
 </body>
 
