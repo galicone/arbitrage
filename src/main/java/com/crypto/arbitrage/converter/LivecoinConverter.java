@@ -19,7 +19,7 @@ public class LivecoinConverter {
 		for (TradePairLivecoinModel tradePair : tradePairs) {
 			// Done to be in a format BTCXYZ
 			String[] parts = tradePair.getLabel().split("\\/");
-			String type = parts[1] + parts[0];
+			String type = parts[1] + " - " + parts[0];
 			
 			TradePairDomain tradePairDomain = new TradePairDomain();
 			tradePairDomain.setAskPrice(tradePair.getAskPrice());

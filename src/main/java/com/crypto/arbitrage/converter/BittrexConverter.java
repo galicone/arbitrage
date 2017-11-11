@@ -17,7 +17,7 @@ public class BittrexConverter {
 		List<TradePairBittrexModel> tradePairs = marketsBittrexModel.getTradePairs();
 		
 		for (TradePairBittrexModel tradePair : tradePairs) {
-			String type = tradePair.getLabel().replace("-", "");
+			String type = tradePair.getLabel().replace("-", " - ");
 			
 			TradePairDomain tradePairDomain = new TradePairDomain();
 			tradePairDomain.setAskPrice(tradePair.getAskPrice());
