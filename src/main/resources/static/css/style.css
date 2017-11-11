@@ -8510,13 +8510,25 @@ tr.group:hover {
 }
 
 #btn_login {
-	background-color: #18699e;
+	background-color: #2e9fd6;
+	margin-left: 60px;
 }
 
 #login-part {
-	background-image:url(/images/textured-background.jpg);
-	height: 500px;
-	border-bottom: 1px solid blue;
-	
+	background-image:url(/images/textured-background.png);
+	height: 550px;
+}
+
+#login-form {
+	display: inline-block; 
+	padding: 22px 38px 0px 38px; 
+	border: 1px; 
+	margin-left: 70%; 
+	margin-top: 120px; 
+	margin-right: 100px;
+	box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.75);
+	border-radius: 21px 21px 21px 21px;
+	width: 300px;
+	height: 350px;
 }
 
