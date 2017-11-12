@@ -8517,7 +8517,7 @@ tr.group:hover {
 
 #login-part {
 	background-image:url(/images/textured-background.png);
-	background-size: 100%;
+	background-size:100% 100%;
 	height: 570px;
 }
 
