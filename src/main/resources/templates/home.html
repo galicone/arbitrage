@@ -8,42 +8,56 @@
 
 <body>
 	<main>
-	
-		<div id="login-part">
+	<div id="login-part">
 		<form th:action="@{/home}" method="post">
 			<div id="login-form"
-				class="z-depth-3 y-depth-3 x-depth-3 white green-text lighten-4 row">
-				
-				<div th:if="${param.error}">Invalid username and password.</div>
-				<div class="section"></div>
+				class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
 
+				<div id="login-title" class="row">
+					<div class="input-field col s12 center">
+						<h5>Login</h5>
+					</div>
+				</div>
 				<div class='row'>
 					<div class='input-field col s12'>
-						<input class='validate' type="text" name='username' id='email'
-							required="true" placeholder=" "/> <label for='email'>Email</label>
+						<i class="material-icons prefix pt-5">email</i> <input
+							class='validate' type="text" name='username' id='email'
+							required="true" placeholder=" " /> <label for='email'>Email</label>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='input-field col m12'>
-						<input class='validate' type='password' name='password'
-							id='password' required="true" placeholder=" "/> <label for='password'>Password</label>
+						<i class="material-icons prefix pt-5">lock_outline</i> <input
+							class='validate' type='password' name='password' id='password'
+							required="true" placeholder=" " /> <label for='password'>Password</label>
 					</div>
-					<label style='float: right;'> <b
-						style="color: rgb(163, 84, 84);">Forgot Password? </b>
-					</label>
 				</div>
 				<br />
 				<center>
 					<div class='row'>
-						<button id="btn_login" type='submit'
-							name='btn_login'
-							class='col  s6 btn btn-small white-text  waves-effect z-depth-1 y-depth-1'>Login</button>
+						<button id="btn_login" type='submit' name='btn_login'
+							class='col s6 btn btn-small white-text  waves-effect z-depth-1 y-depth-1'>Login</button>
 					</div>
 				</center>
-
+				<div class="row">
+					<div class="input-field col s6 m6 l6">
+						<p class="margin medium-small">
+							<a href="page-register.html">Register Now!</a>
+						</p>
+					</div>
+					<div class="input-field col s6 m6 l6">
+						<p class="margin right-align medium-small">
+							<a href="page-forgot-password.html">Forgot password ?</a>
+						</p>
+					</div>
+				</div>
+				<center>
+					<div id="invalid-credentials" class="red-text"
+						th:if="${param.error}">Invalid username and password.</div>
+				</center>
 			</div>
 		</form>
-		</div>
+	</div>
 
 	<div class="section"></div>
 	<center>
@@ -83,8 +97,6 @@
 				</article>
 			</section>
 		</div>
-
-
 	</center>
 	</main>
 
