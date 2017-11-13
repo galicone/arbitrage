@@ -8542,3 +8542,19 @@ tr.group:hover {
 	margin-top: -13px
 }
 
+#exchangesDropdown {
+	height : auto;
+	width : 700px;
+	float: left;
+}
+
+#btn_applyExchanges {
+	float: right;
+	margin-top: 15px;
+	background-color: #2e9fd6;
+}
+
+#applyExchanges {
+	width: 950px;
+	margin: 0 auto;
+}

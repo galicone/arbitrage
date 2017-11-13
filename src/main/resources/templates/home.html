@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head lang="en" th:replace="fragments/header">
 </head>
 
 <body>
+
 	<main>
+
 	<div id="login-part">
 		<form th:action="@{/home}" method="post">
-			<div id="login-form"
-				class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
+			<div id="login-form" class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
 
 				<div id="login-title" class="row">
 					<div class="input-field col s12 center">
@@ -20,16 +20,14 @@
 				</div>
 				<div class='row'>
 					<div class='input-field col s12'>
-						<i class="material-icons prefix pt-5">email</i> <input
-							class='validate' type="text" name='username' id='email'
+						<i class="material-icons prefix pt-5">email</i> <input class='validate' type="text" name='username' id='email'
 							required="true" placeholder=" " /> <label for='email'>Email</label>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='input-field col m12'>
-						<i class="material-icons prefix pt-5">lock_outline</i> <input
-							class='validate' type='password' name='password' id='password'
-							required="true" placeholder=" " /> <label for='password'>Password</label>
+						<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' type='password' name='password'
+							id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
 					</div>
 				</div>
 				<br />
@@ -52,8 +50,7 @@
 					</div>
 				</div>
 				<center>
-					<div id="invalid-credentials" class="red-text"
-						th:if="${param.error}">Invalid username and password.</div>
+					<div id="invalid-credentials" class="red-text" th:if="${param.error}">Invalid username and password.</div>
 				</center>
 			</div>
 		</form>
