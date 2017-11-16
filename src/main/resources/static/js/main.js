@@ -66,9 +66,7 @@ $(document).ready(function() {
 	loadDataUrl = "/arbitrage/";
 
 	$("#btnApplyExchanges").on("click", function(e) {
-		if ($('select').val() != "") {
-			loadDataUrl = "/arbitrage/selectedExchanges=" + $('select').val();
-		}
+		loadDataUrl = "/arbitrage?exchanges=" + $('select').val();
 		$("#jsGrid").jsGrid("loadData");
 	});
 

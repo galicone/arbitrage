@@ -1,9 +1,11 @@
 package com.crypto.arbitrage.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -51,8 +53,15 @@ public class ArbitrageService {
 		return arbitrages;
 	}
 	
-	public List<ArbitrageModel> returnCalculationResult() {
-		return arbitrages;
+	public List<ArbitrageModel> returnCalculationResult(String exchanges) {
+		List<String> exchangesList = getListOfExchanges(exchanges);
+		
+		List<ArbitrageModel> filteredArbitrages = arbitrages.stream()
+				.filter(arbitrage -> exchangesList.contains(arbitrage.getSellAt()))
+				.filter(arbitrage -> exchangesList.contains(arbitrage.getBuyAt()))
+				.collect(Collectors.toList());
+
+		return filteredArbitrages;
 	}
 	
 	private List<ArbitrageModel> calculateArbitrage(Map<String, TradePairDomain> tradePairs1, Map<String, TradePairDomain> tradePairs2) {
@@ -91,6 +100,13 @@ public class ArbitrageService {
 		}
 		
 		return arbitrages;
+	}
+	
+	private List<String> getListOfExchanges(String exchanges) {
+		if (exchanges != null) {
+			return Arrays.asList(exchanges.split(","));
+		}
+		return new ArrayList<String>();
 	}
 	
 }

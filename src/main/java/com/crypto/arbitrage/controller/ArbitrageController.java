@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crypto.arbitrage.domain.ArbitrageModel;
@@ -29,8 +30,8 @@ public class ArbitrageController {
 	private BittrexArbitrageService bittrexArbitrageService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage")
-	public List<ArbitrageModel> calculateArbitrage() {
-		return arbitrageService.returnCalculationResult();
+	public List<ArbitrageModel> calculateArbitrage(@RequestParam(value = "exchanges", required = false) String exchanges) {
+		return arbitrageService.returnCalculationResult(exchanges);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage/livecoin")
