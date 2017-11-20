@@ -17,7 +17,7 @@ import com.crypto.arbitrage.domain.TradePairDomain;
 import com.crypto.arbitrage.domain.cryptopia.MarketsCryptopiaModel;
 
 @Service
-public class CryptopiaCalculationService extends AbstractCalculationService {
+public class CryptopiaCommunicationService extends AbstractCommunicationService {
 	
 	@Override
 	public Map<String, TradePairDomain> getData() {

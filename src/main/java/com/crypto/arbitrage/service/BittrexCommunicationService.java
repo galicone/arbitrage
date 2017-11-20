@@ -11,29 +11,29 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.stereotype.Service;
 
-import com.crypto.arbitrage.converter.LivecoinConverter;
+import com.crypto.arbitrage.converter.BittrexConverter;
 import com.crypto.arbitrage.domain.Constants;
 import com.crypto.arbitrage.domain.TradePairDomain;
-import com.crypto.arbitrage.domain.livecoin.MarketsLivecoinModel;
+import com.crypto.arbitrage.domain.bittrex.MarketsBittrexModel;
 
 @Service
-public class LivecoinCalculationService extends AbstractCalculationService {
-	
+public class BittrexCommunicationService extends AbstractCommunicationService {
+
 	@Override
 	public Map<String, TradePairDomain> getData() {
 		Client client = ClientBuilder.newClient(); 
 		
 		WebTarget target = client.target(getBaseURI());
 		
-		MarketsLivecoinModel response = target.path(Constants.GET_MARKETS_LIVECOIN).
+		MarketsBittrexModel response = target.path(Constants.GET_MARKETS_BITTREX).
                 request().
-                accept(MediaType.APPLICATION_JSON).
-                get(MarketsLivecoinModel.class);	
+                accept(MediaType.TEXT_PLAIN).
+                get(MarketsBittrexModel.class);
 		
-		return LivecoinConverter.convertResult(response);
+		return BittrexConverter.convertResult(response);
 	}
 	
 	private static URI getBaseURI() {
-        return UriBuilder.fromUri(Constants.BASE_URL_LIVECOIN).build();
+        return UriBuilder.fromUri(Constants.BASE_URL_BITTREX).build();
     }
 }
