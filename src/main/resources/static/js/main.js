@@ -11,7 +11,21 @@ $(document).ready(function() {
 			paging : false,
 			selecting : false,
 			autoload : true,
-
+			onDataLoaded : function(args) {
+				colorProfit();
+			},
+			onItemUpdated : function(args) {
+				colorProfit();
+			},
+			onOptionChanged : function(args) {
+				colorProfit();
+			},
+			onPageChanged : function(args) {
+				colorProfit();
+			},
+			onRefreshed : function(args) {
+				colorProfit();
+			},
 			controller : {
 				loadData : function() {
 					var d = $.Deferred();
@@ -69,5 +83,12 @@ $(document).ready(function() {
 		loadDataUrl = "/arbitrage?exchanges=" + $('select').val();
 		$("#jsGrid").jsGrid("loadData");
 	});
+	
+	function colorProfit() {
+		$('.jsgrid-table tr td:last-child').each(function(){
+			if($(this).text() > 2 && $(this).text() < 5)$(this).css('background-color','#dbffe2');
+			if($(this).text() > 5 )$(this).css('background-color','#88f79d');
+		});
+	}
 
 });

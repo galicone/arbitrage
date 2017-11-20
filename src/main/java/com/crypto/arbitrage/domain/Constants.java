@@ -1,5 +1,8 @@
 package com.crypto.arbitrage.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Constants {
 
 	public static String BASE_URL_CRYPTOPIA = "https://www.cryptopia.co.nz/api/";
@@ -19,4 +22,13 @@ public final class Constants {
 	public static String EXCHANGE_NAME_BITTREX = "Bittrex";
 	public static String EXCHANGE_NAME_LIVECOIN = "Livecoin";
 	public static String EXCHANGE_NAME_POLONIEX = "Poloniex";
+	
+	public static List<String> getCurrenciesForDelisting() {
+		List<String> delistingList = new ArrayList<String>();
+		
+		delistingList.add("BTC - BCC");
+		delistingList.add("ETH - BCC");
+		
+		return delistingList;
+	}
 }

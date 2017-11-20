@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.crypto.arbitrage.domain.ArbitrageModel;
+import com.crypto.arbitrage.domain.Constants;
 import com.crypto.arbitrage.domain.TradePairDomain;
 import com.crypto.arbitrage.support.Helper;
 
@@ -26,25 +27,25 @@ public class ArbitrageService {
 	private LivecoinCommunicationService livecoinCalculationService;
 	@Autowired
 	private PoloniexCommunicationService poloniexCommunicationService;
-	
-	private List<ArbitrageModel> arbitrages =  new ArrayList<ArbitrageModel>();
-	
+
+	private List<ArbitrageModel> arbitrages = new ArrayList<ArbitrageModel>();
+
 	@Scheduled(initialDelay = 3000, fixedRate = 60000)
 	private List<ArbitrageModel> calculateArbitrage() {
 		Map<String, TradePairDomain> bittrexTradePairs = bittrexCalculationService.getData();
 		Map<String, TradePairDomain> cryptopiaTradePairs = cryptopiaCalculationService.getData();
 		Map<String, TradePairDomain> livecoinTradePairs = livecoinCalculationService.getData();
 		Map<String, TradePairDomain> poloniexTradePairs = poloniexCommunicationService.getData();
-		
+
 		List<ArbitrageModel> arbitragesTmp = new ArrayList<ArbitrageModel>();
-		
+
 		List<ArbitrageModel> bittrexCryptopiaArbitrages = calculateArbitrage(bittrexTradePairs, cryptopiaTradePairs);
 		List<ArbitrageModel> bittrexLivecoinArbitrages = calculateArbitrage(bittrexTradePairs, livecoinTradePairs);
 		List<ArbitrageModel> bittrexPoloniexArbitrages = calculateArbitrage(bittrexTradePairs, poloniexTradePairs);
 		List<ArbitrageModel> livecoinCryptopiaArbitrages = calculateArbitrage(livecoinTradePairs, cryptopiaTradePairs);
 		List<ArbitrageModel> livecoinPoloniexArbitrages = calculateArbitrage(livecoinTradePairs, poloniexTradePairs);
 		List<ArbitrageModel> cryptopianPoloniexArbitrages = calculateArbitrage(cryptopiaTradePairs, poloniexTradePairs);
-		
+
 		arbitragesTmp.addAll(bittrexCryptopiaArbitrages);
 		arbitragesTmp.addAll(bittrexLivecoinArbitrages);
 		arbitragesTmp.addAll(bittrexPoloniexArbitrages);
@@ -52,33 +53,37 @@ public class ArbitrageService {
 		arbitragesTmp.addAll(livecoinPoloniexArbitrages);
 		arbitragesTmp.addAll(cryptopianPoloniexArbitrages);
 		Collections.sort(arbitragesTmp);
-		
+
 		arbitrages.clear();
 		arbitrages.addAll(arbitragesTmp);
-		
+
+		// Remove problematic currencies 
+		removeDelistedCurrencies(arbitrages);
+
 		return arbitrages;
 	}
-	
+
+	// Filter by exchanges
 	public List<ArbitrageModel> returnCalculationResult(String exchanges) {
 		List<String> exchangesList = getListOfExchanges(exchanges);
-		
+
 		List<ArbitrageModel> filteredArbitrages = arbitrages.stream()
 				.filter(arbitrage -> exchangesList.contains(arbitrage.getSellAt()))
-				.filter(arbitrage -> exchangesList.contains(arbitrage.getBuyAt()))
-				.collect(Collectors.toList());
+				.filter(arbitrage -> exchangesList.contains(arbitrage.getBuyAt())).collect(Collectors.toList());
 
 		return filteredArbitrages;
 	}
-	
-	private List<ArbitrageModel> calculateArbitrage(Map<String, TradePairDomain> tradePairs1, Map<String, TradePairDomain> tradePairs2) {
+
+	private List<ArbitrageModel> calculateArbitrage(Map<String, TradePairDomain> tradePairs1,
+			Map<String, TradePairDomain> tradePairs2) {
 		List<ArbitrageModel> arbitrages = new ArrayList<ArbitrageModel>();
-		
+
 		for (Map.Entry<String, TradePairDomain> entry : tradePairs1.entrySet()) {
-			
+
 			if (tradePairs2.containsKey(entry.getKey())) {
 				TradePairDomain tradePair2 = tradePairs2.get(entry.getKey());
 				TradePairDomain tradePair1 = entry.getValue();
-				
+
 				if (tradePair2.getBidPrice() > tradePair1.getAskPrice()) {
 					ArbitrageModel arbitrage = new ArbitrageModel();
 					arbitrage.setType(tradePair2.getType());
@@ -86,11 +91,12 @@ public class ArbitrageService {
 					arbitrage.setBuyAtPrice(tradePair1.getAskPrice());
 					arbitrage.setBuyAt(tradePair1.getExchangeName());
 					arbitrage.setSellAt(tradePair2.getExchangeName());
-					arbitrage.setDifferencePercentage(Helper.roundValue(((tradePair2.getBidPrice() / tradePair1.getAskPrice()) - 1)* 100));
-					
+					arbitrage.setDifferencePercentage(
+							Helper.roundValue(((tradePair2.getBidPrice() / tradePair1.getAskPrice()) - 1) * 100));
+
 					arbitrages.add(arbitrage);
 				}
-				
+
 				if (tradePair1.getBidPrice() > tradePair2.getAskPrice()) {
 					ArbitrageModel arbitrage = new ArbitrageModel();
 					arbitrage.setType(tradePair2.getType());
@@ -98,21 +104,29 @@ public class ArbitrageService {
 					arbitrage.setSellAtPrice(tradePair1.getBidPrice());
 					arbitrage.setBuyAt(tradePair2.getExchangeName());
 					arbitrage.setSellAt(tradePair1.getExchangeName());
-					arbitrage.setDifferencePercentage(Helper.roundValue(((tradePair1.getBidPrice() / tradePair2.getAskPrice()) - 1)* 100));
-					
+					arbitrage.setDifferencePercentage(
+							Helper.roundValue(((tradePair1.getBidPrice() / tradePair2.getAskPrice()) - 1) * 100));
+
 					arbitrages.add(arbitrage);
 				}
 			}
 		}
-		
+
 		return arbitrages;
 	}
-	
+
 	private List<String> getListOfExchanges(String exchanges) {
 		if (exchanges != null) {
 			return Arrays.asList(exchanges.split(","));
 		}
 		return new ArrayList<String>();
 	}
-	
+
+	private void removeDelistedCurrencies(List<ArbitrageModel> arbitrages) {
+
+		this.arbitrages = arbitrages.stream()
+				.filter(arbitrage -> !Constants.getCurrenciesForDelisting().contains(arbitrage.getType()))
+				.collect(Collectors.toList());
+	}
+
 }
