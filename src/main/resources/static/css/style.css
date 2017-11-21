@@ -2424,10 +2424,6 @@ html, body {
   height: 100%;
 }
 
-body {
-  background-color: #f9f9f9;
-}
-
 body.layout-light ul.side-nav.leftside-navigation {
   top: 62px;
 }
@@ -8569,4 +8565,9 @@ tr.group:hover {
 	height : auto;
 	width : 200px;
 	float: right;
+}
+
+.jsgrid-grid-header,
+.jsgrid-grid-body {
+  overflow-y: unset;
 }

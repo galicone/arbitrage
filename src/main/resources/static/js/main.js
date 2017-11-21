@@ -5,9 +5,7 @@ $(document).ready(
 			// JsGrid initialization
 			$(function() {
 				$("#jsGrid").jsGrid({
-					height : "auto",
 					width : "950px",
-
 					sorting : true,
 					paging : false,
 					selecting : false,
