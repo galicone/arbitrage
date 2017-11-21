@@ -28,6 +28,8 @@ public final class Constants {
 		
 		delistingList.add("BTC - BCC");
 		delistingList.add("ETH - BCC");
+		delistingList.add("BTC - BTG");
+		delistingList.add("BTC - BTM");
 		
 		return delistingList;
 	}

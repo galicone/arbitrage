@@ -16,10 +16,12 @@ public class ArbitrageController {
 
 	@Autowired
 	private ArbitrageService arbitrageService;
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/arbitrage")
-	public List<ArbitrageModel> calculateArbitrage(@RequestParam(value = "exchanges", required = false) String exchanges) {
-		return arbitrageService.returnCalculationResult(exchanges);
+	public List<ArbitrageModel> calculateArbitrage(
+			@RequestParam(value = "exchanges", required = false) String exchanges,
+			@RequestParam(value = "profitPercentage", required = false) Double profitPercentage) {
+		return arbitrageService.returnCalculationResult(exchanges, profitPercentage);
 	}
-	
+
 }

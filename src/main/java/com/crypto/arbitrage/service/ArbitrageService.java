@@ -64,12 +64,14 @@ public class ArbitrageService {
 	}
 
 	// Filter by exchanges
-	public List<ArbitrageModel> returnCalculationResult(String exchanges) {
+	public List<ArbitrageModel> returnCalculationResult(String exchanges, Double profitPercentage) {
 		List<String> exchangesList = getListOfExchanges(exchanges);
 
 		List<ArbitrageModel> filteredArbitrages = arbitrages.stream()
 				.filter(arbitrage -> exchangesList.contains(arbitrage.getSellAt()))
-				.filter(arbitrage -> exchangesList.contains(arbitrage.getBuyAt())).collect(Collectors.toList());
+				.filter(arbitrage -> exchangesList.contains(arbitrage.getBuyAt()))
+				.filter(arbitrage -> arbitrage.getDifferencePercentage() > profitPercentage)
+				.collect(Collectors.toList());
 
 		return filteredArbitrages;
 	}
