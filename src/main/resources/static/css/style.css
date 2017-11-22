@@ -8501,8 +8501,8 @@ tr.group:hover {
 
 .navbar-custom {
 	background-color: #18699e;
-	height: 50px;
-	line-height: 50px;
+	height: 78px;
+	line-height: 78px;
 }
 
 #btn_login {
@@ -8570,4 +8570,9 @@ tr.group:hover {
 .jsgrid-grid-header,
 .jsgrid-grid-body {
   overflow-y: unset;
+}
+
+#smallLogo {
+	padding-left: 10px;
+	padding-top: 5px;
 }
