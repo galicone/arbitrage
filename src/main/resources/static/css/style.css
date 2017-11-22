@@ -8576,3 +8576,8 @@ tr.group:hover {
 	padding-left: 10px;
 	padding-top: 5px;
 }
+
+#bigLogo {
+	position: absolute;
+	padding-left: 15px;
+}
