@@ -27,6 +27,8 @@ public class ArbitrageService {
 	private LivecoinCommunicationService livecoinCalculationService;
 	@Autowired
 	private PoloniexCommunicationService poloniexCommunicationService;
+	@Autowired
+	private HitbtcCommunicationService hitbtcCommunicationService;
 
 	private List<ArbitrageModel> arbitrages = new ArrayList<ArbitrageModel>();
 
@@ -36,22 +38,37 @@ public class ArbitrageService {
 		Map<String, TradePairDomain> cryptopiaTradePairs = cryptopiaCalculationService.getData();
 		Map<String, TradePairDomain> livecoinTradePairs = livecoinCalculationService.getData();
 		Map<String, TradePairDomain> poloniexTradePairs = poloniexCommunicationService.getData();
+		Map<String, TradePairDomain> hitbtcTradePairs = hitbtcCommunicationService.getData();
 
 		List<ArbitrageModel> arbitragesTmp = new ArrayList<ArbitrageModel>();
 
 		List<ArbitrageModel> bittrexCryptopiaArbitrages = calculateArbitrage(bittrexTradePairs, cryptopiaTradePairs);
 		List<ArbitrageModel> bittrexLivecoinArbitrages = calculateArbitrage(bittrexTradePairs, livecoinTradePairs);
 		List<ArbitrageModel> bittrexPoloniexArbitrages = calculateArbitrage(bittrexTradePairs, poloniexTradePairs);
+		List<ArbitrageModel> bittrexHitbtcArbitrages = calculateArbitrage(bittrexTradePairs, hitbtcTradePairs);
+		
 		List<ArbitrageModel> livecoinCryptopiaArbitrages = calculateArbitrage(livecoinTradePairs, cryptopiaTradePairs);
 		List<ArbitrageModel> livecoinPoloniexArbitrages = calculateArbitrage(livecoinTradePairs, poloniexTradePairs);
-		List<ArbitrageModel> cryptopianPoloniexArbitrages = calculateArbitrage(cryptopiaTradePairs, poloniexTradePairs);
-
+		List<ArbitrageModel> livecoinHitbtcArbitrages = calculateArbitrage(livecoinTradePairs, hitbtcTradePairs);
+		
+		List<ArbitrageModel> cryptopiaPoloniexArbitrages = calculateArbitrage(cryptopiaTradePairs, poloniexTradePairs);
+		List<ArbitrageModel> cryptopiaHitbtcArbitrages = calculateArbitrage(cryptopiaTradePairs, hitbtcTradePairs);
+		
+		List<ArbitrageModel> poloniexHitbtcArbitrages = calculateArbitrage(poloniexTradePairs, hitbtcTradePairs);
+		
+		
 		arbitragesTmp.addAll(bittrexCryptopiaArbitrages);
 		arbitragesTmp.addAll(bittrexLivecoinArbitrages);
 		arbitragesTmp.addAll(bittrexPoloniexArbitrages);
 		arbitragesTmp.addAll(livecoinCryptopiaArbitrages);
 		arbitragesTmp.addAll(livecoinPoloniexArbitrages);
-		arbitragesTmp.addAll(cryptopianPoloniexArbitrages);
+		arbitragesTmp.addAll(cryptopiaPoloniexArbitrages);
+		arbitragesTmp.addAll(bittrexHitbtcArbitrages);
+		arbitragesTmp.addAll(livecoinHitbtcArbitrages);
+		arbitragesTmp.addAll(cryptopiaHitbtcArbitrages);
+		arbitragesTmp.addAll(poloniexHitbtcArbitrages);
+		
+		
 		Collections.sort(arbitragesTmp);
 
 		arbitrages.clear();

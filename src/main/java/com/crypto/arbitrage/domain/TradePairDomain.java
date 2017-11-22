@@ -41,4 +41,19 @@ public class TradePairDomain {
 	public void setExchangeName(String exchangeName) {
 		this.exchangeName = exchangeName;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("TradePairDomain [askPrice=");
+		builder.append(askPrice);
+		builder.append(", bidPrice=");
+		builder.append(bidPrice);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append(", exchangeName=");
+		builder.append(exchangeName);
+		builder.append("]");
+		return builder.toString();
+	}
 }
