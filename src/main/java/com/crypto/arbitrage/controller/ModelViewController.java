@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,18 +43,16 @@ public class ModelViewController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/register")
-	public String register(@Valid User user, Model model, BindingResult bindingResult) {
-		
-		if (bindingResult.hasErrors()) {
-			return "register";
-		}
-		
+	public String register(@Valid User user, Model model) {
 		try {
 			registrationService.registerUser(user);
 		} catch (ApplicationException e) {
-			notificationService.addErrorMessage("Customer Already registered");
+			notificationService.addErrorMessage("Email already registered");
+			return "register";
 		}
 		
-		return "register";
+		notificationService.addInfoMessage("Successful registration");
+		
+		return "home";
 	}
 }

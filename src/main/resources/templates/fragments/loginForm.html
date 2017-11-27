@@ -10,7 +10,7 @@
 			</div>
 			<div class='row'>
 				<div class='input-field col s12'>
-					<i class="material-icons prefix pt-5">email</i> <input class='validate' type="text" name='username' id='username'
+					<i class="material-icons prefix pt-5">email</i> <input class='validate' type="email" name='username' id='username'
 						required="true" placeholder=" " /> <label for='email'>Email</label>
 				</div>
 			</div>
@@ -40,7 +40,28 @@
 				</div>
 			</div>
 			<center>
-				<div id="invalid-credentials" class="red-text" th:if="${param.error}">Invalid username and password.</div>
+				<div th:if="${param.error}" id="card-alert" class="card red">
+					<div class="card-content white-text">
+						<p>
+							<i class="material-icons">warning</i>&nbsp&nbsp Invalid username and/or password
+						</p>
+					</div>
+				</div>
+				<center>
+					<ul id="messages"
+						th:with="notifyMessages=${session[T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY]}">
+						<div th:if="${notifyMessages}" id="card-alert" class="card green">
+							<div class="card-content white-text">
+								<p>
+									<i class="material-icons">check</i><label id="infoMessageLAbel" th:each="msg : ${notifyMessages}"
+										th:if="${msg.type == T(com.crypto.arbitrage.support.NotificationMessageType).INFO}" th:text="${msg.text}"></label>
+								</p>
+							</div>
+						</div>
+						<span th:if="${notifyMessages}" th:remove="all"
+							th:text="${session.remove(T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY)}"></span>
+					</ul>
+				</center>
 			</center>
 		</div>
 	</form>

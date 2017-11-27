@@ -10,14 +10,14 @@
 			</div>
 			<div class='row'>
 				<div class='input-field col s12'>
-					<i class="material-icons prefix pt-5">email</i> <input class='validate' th:field="*{username}"  type="text" name='username' id='username'
-						required="true" placeholder=" " /> <label for='email'>Email</label>
+					<i class="material-icons prefix pt-5">email</i> <input class='validate' th:field="*{username}" type="email"
+						name='username' id='username' required="true" placeholder=" " /> <label for='email'>Email</label>
 				</div>
 			</div>
 			<div class='row'>
 				<div class='input-field col m12'>
-					<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' th:field="*{password}" type='password' name='password'
-						id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
+					<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' th:field="*{password}"
+						type='password' name='password' id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
 				</div>
 			</div>
 
@@ -36,15 +36,18 @@
 				</div>
 			</div>
 			<center>
-
-
 				<ul id="messages"
-					th:with="notifyMessages=${session[T(com.crypto.arbitrage.service
-          .NotificationService).NOTIFY_MSG_SESSION_KEY]}">
-					<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" class="red-text"></li>
+					th:with="notifyMessages=${session[T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY]}">
+					<div th:if="${notifyMessages}" id="card-alert" class="card red">
+						<div class="card-content white-text">
+							<p>
+								<i class="material-icons">warning</i><label id="infoMessageLAbel" th:each="msg : ${notifyMessages}"
+									th:text="${msg.text}"></label>
+							</p>
+						</div>
+					</div>
 					<span th:if="${notifyMessages}" th:remove="all"
-						th:text="${session.remove(
-          T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY)}"></span>
+						th:text="${session.remove(T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY)}"></span>
 				</ul>
 			</center>
 		</div>

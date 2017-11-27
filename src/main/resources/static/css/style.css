@@ -8588,3 +8588,14 @@ body, html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+#card-alert {
+	border-radius: 8px 8px 8px 8px;
+	width: 305px;
+}
+
+#infoMessageLAbel {
+	font-size: 15px;
+	color: white;
+	padding-left: 10px;
+}

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crypto.arbitrage.support.NotificationMessage;
+import com.crypto.arbitrage.support.NotificationMessageType;
+
 @Service
 public class NotificationService {
 	
@@ -34,26 +37,5 @@ public class NotificationService {
         httpSession.setAttribute(NOTIFY_MSG_SESSION_KEY, notifyMessages);
     }
 
-    public enum NotificationMessageType {
-        INFO,
-        ERROR
-    }
-
-    public class NotificationMessage {
-        NotificationMessageType type;
-        String text;
-
-        public NotificationMessage(NotificationMessageType type, String text) {
-            this.type = type;
-            this.text = text;
-        }
-
-        public NotificationMessageType getType() {
-            return type;
-        }
-
-        public String getText() {
-            return text;
-        }
-    }
+    
 }
