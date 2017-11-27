@@ -1,0 +1,52 @@
+<div th:fragment="registerForm">
+	<img id="bigLogo" src="/images/logo_big.png">
+	<form th:action="@{/register}" method="post" th:object="${user}">
+		<div id="login-form" class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
+
+			<div id="login-title" class="row">
+				<div class="input-field col s12 center">
+					<h5>Register</h5>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='input-field col s12'>
+					<i class="material-icons prefix pt-5">email</i> <input class='validate' th:field="*{username}"  type="text" name='username' id='username'
+						required="true" placeholder=" " /> <label for='email'>Email</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='input-field col m12'>
+					<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' th:field="*{password}" type='password' name='password'
+						id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
+				</div>
+			</div>
+
+			<br />
+			<center>
+				<div class='row'>
+					<button id="btn_login" type='submit' name='btn_login'
+						class='col s6 btn btn-small white-text  waves-effect z-depth-1 y-depth-1'>Register</button>
+				</div>
+			</center>
+			<div class="row">
+				<div class="input-field col s6 m6 l6">
+					<p class="margin medium-small">
+						<a href="home">Back to Login</a>
+					</p>
+				</div>
+			</div>
+			<center>
+
+
+				<ul id="messages"
+					th:with="notifyMessages=${session[T(com.crypto.arbitrage.service
+          .NotificationService).NOTIFY_MSG_SESSION_KEY]}">
+					<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" class="red-text"></li>
+					<span th:if="${notifyMessages}" th:remove="all"
+						th:text="${session.remove(
+          T(com.crypto.arbitrage.service.NotificationService).NOTIFY_MSG_SESSION_KEY)}"></span>
+				</ul>
+			</center>
+		</div>
+	</form>
+</div>

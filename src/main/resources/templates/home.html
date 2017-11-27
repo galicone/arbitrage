@@ -5,96 +5,10 @@
 <head lang="en" th:replace="fragments/header">
 </head>
 
-<body>
+<body id="homePage">
 
 	<main>
-	<div id="login-part">
-	<img id="bigLogo" src="/images/logo_big.png">
-		<form th:action="@{/home}" method="post">
-			<div id="login-form" class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
-
-				<div id="login-title" class="row">
-					<div class="input-field col s12 center">
-						<h5>Login</h5>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='input-field col s12'>
-						<i class="material-icons prefix pt-5">email</i> <input class='validate' type="text" name='username' id='username'
-							required="true" placeholder=" " /> <label for='email'>Email</label>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='input-field col m12'>
-						<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' type='password' name='password'
-							id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
-					</div>
-				</div>
-				<br />
-				<center>
-					<div class='row'>
-						<button id="btn_login" type='submit' name='btn_login'
-							class='col s6 btn btn-small white-text  waves-effect z-depth-1 y-depth-1'>Login</button>
-					</div>
-				</center>
-				<div class="row">
-					<div class="input-field col s6 m6 l6">
-						<p class="margin medium-small">
-							<a href="page-register.html">Register Now!</a>
-						</p>
-					</div>
-					<div class="input-field col s6 m6 l6">
-						<p class="margin right-align medium-small">
-							<a href="page-forgot-password.html">Forgot password ?</a>
-						</p>
-					</div>
-				</div>
-				<center>
-					<div id="invalid-credentials" class="red-text" th:if="${param.error}">Invalid username and password.</div>
-				</center>
-			</div>
-		</form>
-	</div>
-
-	<div class="section"></div>
-	<center>
-		<div class="row" style="width: 1000px; margin: 0 auto;">
-			<section class="plans-container" id="plans">
-				<article class="col s12 m6 l6">
-					<div class="card">
-						<div class="card-image gradient-45deg-light-blue-cyan">
-							<div class="card-title">FREE</div>
-							<div class="price">
-								<sup>BTC</sup>0 <sub>/mo</sub>
-							</div>
-						</div>
-						<div class="card-content">
-							<ul class="collection">
-								<li class="collection-item">3 exchanges</li>
-								<li class="collection-item">Percentage difference > 1%</li>
-							</ul>
-						</div>
-					</div>
-				</article>
-				<article class="col s12 m6 l6">
-					<div class="card">
-						<div class="card-image gradient-45deg-amber-amber accent-2">
-							<div class="card-title">PREMIUM</div>
-							<div class="price">
-								<sup>BTC</sup>0.0001 <sub>/mo</sub>
-							</div>
-						</div>
-						<div class="card-content">
-							<ul class="collection">
-								<li class="collection-item">5+ exhanges</li>
-								<li class="collection-item">Unlimited percentage difference</li>
-							</ul>
-						</div>
-					</div>
-				</article>
-			</section>
-		</div>
-	</center>
+	<div id="login-part" th:replace="fragments/loginForm">
 	</main>
 
 </body>

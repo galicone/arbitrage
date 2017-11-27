@@ -1,12 +1,27 @@
 package com.crypto.arbitrage.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.crypto.arbitrage.domain.User;
+import com.crypto.arbitrage.exception.ApplicationException;
+import com.crypto.arbitrage.service.NotificationService;
+import com.crypto.arbitrage.service.RegistrationService;
+
 @Controller
 public class ModelViewController {
+	
+	@Autowired
+	private RegistrationService registrationService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/main")
 	public String calculateArbitrage(Model model) {
@@ -24,7 +39,23 @@ public class ModelViewController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/register")
-	public String register(Model model) {
+	public String getRegister(User user) {
+		return "register";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/register")
+	public String register(@Valid User user, Model model, BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			return "register";
+		}
+		
+		try {
+			registrationService.registerUser(user);
+		} catch (ApplicationException e) {
+			notificationService.addErrorMessage("Customer Already registered");
+		}
+		
 		return "register";
 	}
 }

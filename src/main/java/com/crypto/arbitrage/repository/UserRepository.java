@@ -11,7 +11,7 @@ import com.crypto.arbitrage.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	@Query(value = "select 1 from public.user where username=?", nativeQuery = true)
+	@Query(value = "select * from public.user where username=? limit 1", nativeQuery = true)
 	User findByUsername(String username);
 
 	@Query(value = "select * from public.user", nativeQuery = true)

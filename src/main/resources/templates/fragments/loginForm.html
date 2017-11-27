@@ -1,0 +1,47 @@
+<div th:fragment="loginForm">
+	<img id="bigLogo" src="/images/logo_big.png">
+	<form th:action="@{/home}" method="post">
+		<div id="login-form" class="z-depth-3 y-depth-3 x-depth-3 white lighten-4 row">
+
+			<div id="login-title" class="row">
+				<div class="input-field col s12 center">
+					<h5>Login</h5>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='input-field col s12'>
+					<i class="material-icons prefix pt-5">email</i> <input class='validate' type="text" name='username' id='username'
+						required="true" placeholder=" " /> <label for='email'>Email</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='input-field col m12'>
+					<i class="material-icons prefix pt-5">lock_outline</i> <input class='validate' type='password' name='password'
+						id='password' required="true" placeholder=" " /> <label for='password'>Password</label>
+				</div>
+			</div>
+			<br />
+			<center>
+				<div class='row'>
+					<button id="btn_login" type='submit' name='btn_login'
+						class='col s6 btn btn-small white-text  waves-effect z-depth-1 y-depth-1'>Login</button>
+				</div>
+			</center>
+			<div class="row">
+				<div class="input-field col s6 m6 l6">
+					<p class="margin medium-small">
+						<a href="register">Register Now!</a>
+					</p>
+				</div>
+				<div class="input-field col s6 m6 l6">
+					<p class="margin right-align medium-small">
+						<a href="page-forgot-password.html">Forgot password ?</a>
+					</p>
+				</div>
+			</div>
+			<center>
+				<div id="invalid-credentials" class="red-text" th:if="${param.error}">Invalid username and password.</div>
+			</center>
+		</div>
+	</form>
+</div>

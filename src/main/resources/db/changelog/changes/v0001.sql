@@ -1,7 +1,6 @@
 create table "user" (
-  id varchar(255) not null,
+  id serial primary key,
   username varchar(50) not null,
   password varchar(80) not null,
-  enabled boolean not null,
-  primary key (id)
+  enabled boolean not null
 );

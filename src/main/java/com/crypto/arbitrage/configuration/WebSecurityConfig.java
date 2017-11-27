@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		jdbcAuthentication()
     			.usersByUsernameQuery("select username, password, enabled from public.user where username=?")
     			.authoritiesByUsernameQuery("select username, 'ROLE_USER' from public.user where username=?")
+    			.passwordEncoder(bCryptPasswordEncoder)
     			.dataSource(dataSource);
     }
 }
