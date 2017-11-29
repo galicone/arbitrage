@@ -55,4 +55,14 @@ public class ModelViewController {
 		
 		return "home";
 	}
+	
+	@RequestMapping("404")
+	String get404ErrorPage() {
+	    return "home";
+	}
+
+	@RequestMapping("401")
+	String get401ErrorPage() {
+	    return "home";
+	}
 }
