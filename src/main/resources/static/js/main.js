@@ -77,15 +77,20 @@ $(document).ready(
 
 			// Reloading grid after button click
 			loadDataUrl = "/arbitrage/";
-
+			
 			$("#btnApplyExchanges").on(
 					"click",
 					function(e) {
+						var profitPercentageDropdown = $('select[name="profitPercentageDropdown"]').val();
+						
+						if (profitPercentageDropdown == null) {
+							profitPercentageDropdown = 0;
+						}
+						
 						loadDataUrl = "/arbitrage?exchanges="
 								+ $('select[name="exchangesDropdown"]').val()
 								+ "&profitPercentage="
-								+ $('select[name="profitPercentageDropdown"]')
-										.val();
+								+ profitPercentageDropdown;
 						$("#jsGrid").jsGrid("loadData");
 					});
 
