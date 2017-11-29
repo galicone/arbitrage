@@ -1,7 +1,5 @@
 package com.crypto.arbitrage.service;
 
-import java.sql.Timestamp;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,6 @@ public class RegistrationService {
 		}
 		
 		user.setEnabled(true);
-		user.setDateCreated(new Timestamp(System.currentTimeMillis()));
 		userService.saveUser(user);
 		
 		return user;

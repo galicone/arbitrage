@@ -1,7 +1,5 @@
 package com.crypto.arbitrage.domain;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +25,6 @@ public class User {
 	
 	@Column(name = "enabled")
 	private boolean enabled;
-	
-	@Column(name = "date_created")
-	private Timestamp dateCreated;
 
 	public User() {
 	}
@@ -64,13 +59,5 @@ public class User {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public Timestamp getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(Timestamp dateCreated) {
-		this.dateCreated = dateCreated;
 	}
 }
