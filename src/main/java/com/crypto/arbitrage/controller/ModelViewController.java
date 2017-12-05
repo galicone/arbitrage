@@ -32,6 +32,11 @@ public class ModelViewController {
 		return "home";
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/contact")
+	public String contact(Model model) {
+		return "contact";
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public String allOther(Model model) {
 		return "home";
