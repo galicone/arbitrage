@@ -6,6 +6,7 @@ $(document).ready(
 			$(function() {
 				$("#jsGrid").jsGrid({
 					width : "950px",
+					filtering: true,
 					sorting : true,
 					paging : false,
 					selecting : false,
@@ -26,13 +27,25 @@ $(document).ready(
 						colorProfit();
 					},
 					controller : {
-						loadData : function() {
+						loadData : function(filter) {
 							var d = $.Deferred();
 
 							$.ajax({
 								url : loadDataUrl,
 								dataType : "json"
 							}).done(function(response) {
+								
+								var response = $.grep(response, function(item, idx) {
+				                    for (var key in filter) {
+				                        var value = filter[key];
+				                        if (value.length > 0) {
+				                            if (item[key].indexOf(value) == -1)
+				                                return false;
+				                        }
+				                    }
+				                    return true;
+				                });
+								
 								console.log(response);
 								d.resolve(response);
 							});
