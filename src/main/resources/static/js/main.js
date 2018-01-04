@@ -39,8 +39,10 @@ $(document).ready(
 				                    for (var key in filter) {
 				                        var value = filter[key];
 				                        if (value.length > 0) {
-				                            if (item[key].indexOf(value) == -1)
-				                                return false;
+				                        	var regexp = new RegExp(filter[key], 'gi');
+				                            if (!item[key].match(regexp)) {
+				                              return false;
+				                            }
 				                        }
 				                    }
 				                    return true;
