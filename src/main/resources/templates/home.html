@@ -5,6 +5,36 @@
 <head lang="en" th:replace="fragments/header">
 </head>
 
+<body>
+	<nav th:replace="fragments/navbar" />
+
+	<div class="section"></div>
+
+	<div id="applyExchanges">
+		<div id="dropdowns">
+			<div id="profitPercentageDropdown" th:replace="fragments/profitPercentageDropdown"></div>
+			<div id="exchangesDropdown" th:replace="fragments/exchangesDropdown"></div>
+		</div>
+		<a id="btnApplyExchanges" class="waves-effect waves-light  btn"><i class="material-icons left">search</i>Search</a>
+	</div>
+	<div class="section"></div>
+
+	<div class="section"></div>
+	<div class="section"></div>
+
+	<div id="jsGrid" style="margin: 0 auto;"></div>
+</body>
+
+</html>
+
+
+<!-- Login/Register...implementation before removing registration
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head lang="en" th:replace="fragments/header">
+</head>
+
 <body id="homePage">
 
 	<main>
@@ -13,3 +43,4 @@
 
 </body>
 </html>
+ -->
